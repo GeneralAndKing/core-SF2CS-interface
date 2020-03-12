@@ -49,7 +49,7 @@ PointFloatArray JNIHelper::toPointFloatArray(JNIEnv *env, jobject pointFloatArra
     PointFloatFieldID pointFloatFieldID=getPointFloatFieldID(env);
     int size=env->GetIntField(pointFloatArrayObject,pointFloatArrayFieldID.size);
     auto *data=new PointFloat[size];
-    jobjectArray  pointFloats=  (jobjectArray)env->GetObjectField(pointFloatArrayObject,pointFloatArrayFieldID.pointFloats);
+    auto  pointFloats=  (jobjectArray)env->GetObjectField(pointFloatArrayObject,pointFloatArrayFieldID.pointFloats);
     for(int i=0;i<size;i++){
         jobject  pointFloat=env->GetObjectArrayElement(pointFloats,i);
         data[i].x=env->GetDoubleField(pointFloat,pointFloatFieldID.x);
@@ -63,8 +63,8 @@ PointFloatArray JNIHelper::toPointFloatArray(JNIEnv *env, jobject pointFloatArra
 
 FaceDataBaseData JNIHelper::toFaceDataBaseData(JNIEnv *env, jobject faceDataBaseDataObject) {
     FaceDataBaseDataFieldID faceDataBaseDataFieldID = getFaceDataBaseDataFieldID(env);
-    FaceDataBaseData faceDataBaseData;
-    jbyteArray jBytes = (jbyteArray)env->GetObjectField(faceDataBaseDataObject, faceDataBaseDataFieldID.data);
+    FaceDataBaseData faceDataBaseData{};
+    auto jBytes = (jbyteArray)env->GetObjectField(faceDataBaseDataObject, faceDataBaseDataFieldID.data);
     faceDataBaseData.data = (char*)env->GetByteArrayElements(jBytes, 0);
     faceDataBaseData.size = env->GetIntField(faceDataBaseDataObject, faceDataBaseDataFieldID.size);
     faceDataBaseData.index=0;

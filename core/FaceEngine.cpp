@@ -173,3 +173,13 @@ bool FaceEngine::load(FaceDataBaseData faceDataBaseData) {
     return FDB.Load(cStreamReader);
 }
 
+void FaceEngine::set(int property, double value) {
+    seeta::FaceDetector::Property  enumProperty= static_cast<seeta::FaceDetector::Property >(property);
+    FD.set(enumProperty,value);
+}
+
+double FaceEngine::get(int property) {
+    seeta::FaceDetector::Property  enumProperty= static_cast<seeta::FaceDetector::Property >(property);
+    return FD.get(enumProperty);
+}
+

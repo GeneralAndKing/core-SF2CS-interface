@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (Ljava/lang/String;II)Z
  */
 JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_init
-  (JNIEnv *, jobject, jstring, jint, jint);
+        (JNIEnv *, jobject, jstring, jint, jint, jint, jint);
 /*
  * Class:     in_bugr_jni_FaceEngine
  * Method:    detectFace
@@ -118,6 +118,22 @@ JNIEXPORT jobject JNICALL Java_in_bugr_jni_FaceEngine_save
  */
 JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_load
         (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     in_bugr_jni_FaceEngine
+ * Method:    set
+ * Signature: (ID)V
+ */
+JNIEXPORT void JNICALL Java_in_bugr_jni_FaceEngine_set
+        (JNIEnv *, jobject, jint, jdouble);
+
+/*
+ * Class:     in_bugr_jni_FaceEngine
+ * Method:    get
+ * Signature: (I)D
+ */
+JNIEXPORT jdouble JNICALL Java_in_bugr_jni_FaceEngine_get
+        (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
 }

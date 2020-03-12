@@ -7,8 +7,9 @@
  namespace sf2cs{
      class FaceEngine{
      public:
-         FaceEngine(const seeta::ModelSetting &FDModel, const seeta::ModelSetting &PDModel, const seeta::ModelSetting &FRModel)
-         :FD(FDModel),PD(PDModel),FDB(FRModel){}
+         FaceEngine(const seeta::ModelSetting &FDModel, const seeta::ModelSetting &PDModel, const seeta::ModelSetting &FRModel,
+                 int coreWidth,int coreHeight)
+         :FD(FDModel,coreWidth,coreHeight),PD(PDModel),FDB(FRModel){}
 
          FaceInfoArray detectFace(ImageData img);
 
@@ -49,6 +50,10 @@
          FaceDataBaseData save();
 
          bool load(FaceDataBaseData faceDataBaseData);
+
+         void  set(int property, double value);
+
+         double get(int property);
 
      private:
          seeta::FaceDetector FD;

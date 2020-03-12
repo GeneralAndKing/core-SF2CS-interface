@@ -5,14 +5,14 @@
 #include <iostream>
 #include <FaceEngine.h>
 #include <JNIHelper.h>
-sf2cs::FaceEngine * engine= nullptr;
+thread_local sf2cs::FaceEngine * engine= nullptr;
 const std::string FD_MODEL= "/fd_2_00.dat"; //NOLINT
-const std::string  PD_MODEL_5="/pd_2_00_pts5.dat";//NOLINT
-const std::string  PD_MODEL_81="/pd_2_00_pts81.dat";//NOLINT
+const std::string  PD_MODEL="/pd_2_00_pts.dat";//NOLINT
+//const std::string  PD_MODEL_81="/pd_2_00_pts81.dat";//NOLINT
 const std::string FR_MODEL="/fr_2_10.dat";//NOLINT
 using namespace sf2cs;
 JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_init
-(JNIEnv *env, jobject obj, jstring model_dir,jint device,jint id) {
+(JNIEnv *env, jobject obj, jstring model_dir,jint width,jint height, jint device,jint id) {
 
     //如果已初始化则直接返回
     if (engine!= nullptr) {
@@ -27,9 +27,9 @@ JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_init
     }
     //初始化model
     seeta::ModelSetting FDModel( dir+FD_MODEL, seeta::ModelSetting::Device(device), id );
-    seeta::ModelSetting PDModel( dir+PD_MODEL_5, seeta::ModelSetting::Device(device), id );
+    seeta::ModelSetting PDModel( dir+PD_MODEL, seeta::ModelSetting::Device(device), id );
     seeta::ModelSetting FRModel( dir+FR_MODEL, seeta::ModelSetting::Device(device), id );
-    engine= new sf2cs::FaceEngine(FDModel, PDModel, FRModel);
+    engine= new sf2cs::FaceEngine(FDModel, PDModel, FRModel,width,height);
     env->DeleteLocalRef(model_dir);
     return true;
 }
@@ -138,6 +138,16 @@ JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_load
         (JNIEnv * env, jobject obj, jobject faceDataBaseDataObject){
     FaceDataBaseData faceDataBaseData=JNIHelper::toFaceDataBaseData(env,faceDataBaseDataObject);
     return engine->load(faceDataBaseData);
+}
+
+JNIEXPORT void JNICALL Java_in_bugr_jni_FaceEngine_set
+        (JNIEnv * env , jobject obj , jint property, jdouble value){
+    engine->set(property,value);
+}
+
+JNIEXPORT jdouble JNICALL Java_in_bugr_jni_FaceEngine_get
+        (JNIEnv * env , jobject obj, jint property){
+    return engine->get(property);
 }
 
 
