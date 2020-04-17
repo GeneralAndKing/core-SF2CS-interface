@@ -279,7 +279,7 @@ jobject JNIHelper::toQueryResultObject(JNIEnv *env, QueryResult queryResult) {
     QueryResultFieldID queryResultFieldID=getQueryResultFieldID(env);
     jobject queryResultObject= newObject(env,queryResultFieldID);
     env->SetIntField(queryResultObject,queryResultFieldID.index,queryResult.index);
-    env->SetIntField(queryResultObject,queryResultFieldID.score,queryResult.score);
+    env->SetFloatField(queryResultObject,queryResultFieldID.score,queryResult.score);
     return queryResultObject;
 }
 

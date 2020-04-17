@@ -25,6 +25,8 @@
 
          int registerByCroppedFace(const ImageData &faceImage);
 
+         bool deleteByFDB(int index);
+
          float compare(
                  const ImageData &image1, const Rect &face1,
                  const ImageData &image2, const Rect &face2 );

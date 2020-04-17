@@ -65,6 +65,14 @@ JNIEXPORT jint JNICALL Java_in_bugr_jni_FaceEngine_registerByCroppedFace
 
 /*
  * Class:     in_bugr_jni_FaceEngine
+ * Method:    delete
+ * Signature: (I)Z
+ */
+JNIEXPORT jboolean JNICALL Java_in_bugr_jni_FaceEngine_delete
+        (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     in_bugr_jni_FaceEngine
  * Method:    queryByCroppedFace
  * Signature: (Lin/bugr/jni/model/ImageData;)Lin/bugr/jni/model/QueryResult;
  */
@@ -134,6 +142,14 @@ JNIEXPORT void JNICALL Java_in_bugr_jni_FaceEngine_set
  */
 JNIEXPORT jdouble JNICALL Java_in_bugr_jni_FaceEngine_get
         (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     in_bugr_jni_FaceEngine
+ * Method:    destroy
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_in_bugr_jni_FaceEngine_destroy
+        (JNIEnv *, jobject);
 
 #ifdef __cplusplus
 }

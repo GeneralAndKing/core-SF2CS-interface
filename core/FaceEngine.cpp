@@ -114,8 +114,8 @@ QueryResultArray FaceEngine::queryAboveByCroppedFace(const ImageData &faceImage,
         queryResultArray.data[i].score=tempScore[i];
     }
     queryResultArray.size=size;
-    delete tempIndex;
-    delete tempScore;
+    delete[] tempIndex;
+    delete[] tempScore;
     return  queryResultArray;
 }
 
@@ -181,5 +181,9 @@ void FaceEngine::set(int property, double value) {
 double FaceEngine::get(int property) {
     seeta::FaceDetector::Property  enumProperty= static_cast<seeta::FaceDetector::Property >(property);
     return FD.get(enumProperty);
+}
+
+bool FaceEngine::deleteByFDB(int index) {
+    return FDB.Delete(index);
 }
 
