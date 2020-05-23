@@ -24,7 +24,7 @@ include_directories(${SF2CS_CORE_DIR})
 
 set(SEETAFACE2_LIB_DIR ${PROJECT_SOURCE_DIR}/lib/linux/x64)
 
-set(JDK_INCLUDE_DIR /usr/lib/jvm/java-11-openjdk/include)
+set(JDK_INCLUDE_DIR /usr/local/openjdk-11/include)
 include_directories(${JDK_INCLUDE_DIR})
 include_directories(${JDK_INCLUDE_DIR}/linux)
 link_directories(${SEETAFACE2_LIB_DIR})
